@@ -13,7 +13,7 @@ var Controller = Backbone.Router.extend({
     },
 
     about: function () {
-            Views.about.render();
+        Views.about.render();
     },
 
     experience: function () {
@@ -38,57 +38,72 @@ var Views = {};
 var Index = Backbone.View.extend({
     el: $("#container"),
 
+    templateUrl: 'templates/index.html',
+
     render: function () {
-        $.get('templates/index.html', function(data){
-            console.log('2')
-            console.log(data);
-            var domElem = data.activeElement;
-            $("#container").html(domElem.outerHTML);
-        });
+        $.get(this.templateUrl, function (data) {
+            $("#container").html(data);
+        }, 'html');
     }
 });
 
 var About = Backbone.View.extend({
     el: $("#container"),
 
-            render: function () {
-            $.get('templates/about.html', function(data){
-                var domElem = data.activeElement;
-                $("#container").html(domElem.outerHTML);
-            });
+    templateUrl: 'templates/about.html',
+
+    render: function () {
+        $.get(this.templateUrl, function (data) {
+            $("#container").html(data);
+        }, 'html');
     }
 });
 
 var Experience = Backbone.View.extend({
     el: $("#container"),
 
+    templateUrl: 'templates/experience.html',
+
     render: function () {
-        $.get('templates/experience.html', function(data){
-            var domElem = data.activeElement;
-            $("#container").html(domElem.outerHTML);
-        });
+        $.get(this.templateUrl, function (data) {
+            $("#container").html(data);
+        }, 'html');
     }
 });
 
 var Abilities = Backbone.View.extend({
     el: $("#container"),
 
+    templateUrl: 'templates/abilities.html',
+
     render: function () {
-        $.get('templates/abilities.html', function(data){
-            var domElem = data.activeElement;
-            $("#container").html(domElem.outerHTML);
-        });
+        $.get(this.templateUrl, function (data) {
+            $("#container").html(data);
+        }, 'html');
     }
 });
 
 var Contacts = Backbone.View.extend({
     el: $("#container"),
 
+    templateUrl: 'templates/contacts.html',
+
     render: function () {
-        $.get('templates/contacts.html', function(data){
-            var domElem = data.activeElement;
-            $("#container").html(domElem.outerHTML);
-        });
+        $.get(this.templateUrl, function (data) {
+            $("#container").html(data);
+        }, 'html');
+    }
+});
+
+var Navigation = Backbone.View.extend({
+    el: $('nav_wrapper'),
+
+    templateUrl: 'templates/blocks/navigation.html',
+
+    render: function () {
+        $.get(this.templateUrl, function (data) {
+            $('.nav_wrapper').html(data);
+        }, 'html');
     }
 });
 
@@ -97,8 +112,11 @@ Views = {
     about: new About(),
     abilities: new Abilities(),
     experience: new Experience(),
-    contacts: new Contacts()
+    contacts: new Contacts(),
+    navigation: new Navigation()
 };
+
+Views.navigation.render();
 
 var controller = new Controller();
 
